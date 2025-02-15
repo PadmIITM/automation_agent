@@ -1,0 +1,8 @@
+sentence-transformers
+torch
+flask
+requests
+sqlite3
+pytesseract
+openai
+re
