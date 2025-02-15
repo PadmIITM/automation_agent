@@ -1,0 +1,21 @@
+# Use a minimal Python 3.10 image
+FROM python:3.10-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy requirements.txt first to leverage Docker caching
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application files into the container
+COPY llm_utils.py task_handler.py automation_agent.py .  
+COPY data/ ./data/  # Copy the "data" folder
+
+# Expose the required port (if using Flask)
+EXPOSE 8000
+
+# Command to run the Flask application
+CMD ["python", "automation_agent.py"]
