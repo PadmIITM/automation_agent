@@ -4,15 +4,15 @@ FROM python:3.10-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy requirements.txt first to leverage Docker caching
-COPY requirements.txt .
+Run pip install torch==2.1.0
+Run pip install sentence-transformers
+Run pip install flask
+Run pip install requests
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+Run pip install pytesseract
+Run pip install openai
 
-# Copy the rest of the application files into the container
-COPY llm_utils.py task_handler.py automation_agent.py .  
-COPY data/ ./data/  # Copy the "data" folder
+COPY llm_utils.py task_handler.py automation_agent.py .
 
 # Expose the required port (if using Flask)
 EXPOSE 8000
